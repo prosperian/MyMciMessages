@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MyMciMessages</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="messages_title">پیام های من</string>
+    <string name="general">عمومی</string>
+    <string name="bookmarked">ذخیره شده</string>
 </resources>
