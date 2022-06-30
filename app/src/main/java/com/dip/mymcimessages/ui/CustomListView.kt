@@ -9,6 +9,7 @@ import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.dip.mymcimessages.R
 import com.dip.mymcimessages.adapters.MessageListAdapter
 import com.dip.mymcimessages.databinding.CustomListViewBinding
@@ -20,6 +21,7 @@ class CustomListView(context: Context, attrs: AttributeSet?) : ConstraintLayout(
     init {
 
         binding = CustomListViewBinding.bind(inflate(context, R.layout.custom_list_view, this))
+        (binding.rvMessageList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
         binding.rvMessageList.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     }

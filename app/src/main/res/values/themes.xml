@@ -15,4 +15,9 @@
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/vazir</item>
     </style>
+
+    <style name="ShapeAppearanceOverlay.RoundCorner" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12%</item>
+    </style>
 </resources>
