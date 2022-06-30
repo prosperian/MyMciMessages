@@ -46,4 +46,46 @@ class AnimationHandler {
         colorAnimation.start()
     }
 
+    fun showDeleteDialog(root: ConstraintLayout, animationView: View) {
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(root)
+        constraintSet.connect(
+            animationView.id,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.TOP
+        )
+        constraintSet.connect(
+            animationView.id,
+            ConstraintSet.BOTTOM,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM
+        )
+        val transition: Transition = ChangeBounds()
+        transition.interpolator = AnticipateOvershootInterpolator(1.0f)
+        transition.duration = Utils.AnimationDurationLong
+
+        TransitionManager.beginDelayedTransition(root, transition)
+        constraintSet.applyTo(root)
+    }
+
+    fun hideDeleteDialog(root: ConstraintLayout, animationView: View){
+        val constraintSet = ConstraintSet()
+        constraintSet.clone(root)
+        constraintSet.clear(animationView.id, ConstraintSet.BOTTOM)
+        constraintSet.connect(
+            animationView.id,
+            ConstraintSet.TOP,
+            ConstraintSet.PARENT_ID,
+            ConstraintSet.BOTTOM
+        )
+
+        val transition: Transition = ChangeBounds()
+        transition.interpolator = AnticipateOvershootInterpolator(1.0f)
+        transition.duration = Utils.AnimationDurationLong
+
+        TransitionManager.beginDelayedTransition(root, transition)
+        constraintSet.applyTo(root)
+    }
+
 }

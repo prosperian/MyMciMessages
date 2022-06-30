@@ -11,15 +11,19 @@ import com.dip.mymcimessages.R
 import com.dip.mymcimessages.adapters.MessageListAdapter
 import com.dip.mymcimessages.api.Resource
 import com.dip.mymcimessages.databinding.FragmentOnlineMessagesBinding
+import com.dip.mymcimessages.ui.AnimationHandler
+import com.dip.mymcimessages.ui.IListListener
 import com.dip.mymcimessages.viewmodels.MessagesViewModel
 import com.dip.mymcimessages.viewmodels.SharedViewModel
 
-class OnlineMessagesFragment : Fragment() {
+class OnlineMessagesFragment : Fragment(), IListListener {
 
     private final val TAG = OnlineMessagesFragment::class.simpleName
 
     private lateinit var binding: FragmentOnlineMessagesBinding
     private lateinit var viewModel: MessagesViewModel
+    private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var adapter: MessageListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +37,7 @@ class OnlineMessagesFragment : Fragment() {
         binding = FragmentOnlineMessagesBinding.bind(view)
 
         viewModel = ViewModelProvider(requireActivity()).get(MessagesViewModel::class.java)
-        val sharedViewMode = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
         viewModel.messageList.observe(requireActivity()) {
             when (it) {
@@ -43,9 +47,9 @@ class OnlineMessagesFragment : Fragment() {
                     if (messages.isNullOrEmpty()) {
                         binding.root.hideList()
                     } else {
-                        val adapter = MessageListAdapter(messages)
+                        adapter = MessageListAdapter(messages, this)
                         binding.root.showList(adapter)
-                        sharedViewMode.sendMessage(messages.size)
+                        sharedViewModel.updateCount(messages.size)
                     }
                 }
 
@@ -68,6 +72,24 @@ class OnlineMessagesFragment : Fragment() {
         if (!viewModel.messageList.hasActiveObservers())
             viewModel.getMessages()
 
+    }
+
+    override fun showListDeleteDialog() {
+        val animationHandler = AnimationHandler()
+        animationHandler.showDeleteDialog(binding.root, binding.animationView)
+
+        binding.btnCancel.setOnClickListener {
+            animationHandler.hideDeleteDialog(binding.root, binding.animationView)
+            adapter.cancelSelectionMode()
+        }
+        binding.btnDelete.setOnClickListener {
+            animationHandler.hideDeleteDialog(binding.root, binding.animationView)
+            adapter.deleteItems()
+        }
+    }
+
+    override fun listChanged(size: Int) {
+        sharedViewModel.updateCount(size)
     }
 
 

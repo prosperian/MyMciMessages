@@ -11,4 +11,6 @@
     <color name="unselected_color">#80000000</color>
     <color name="fragment_bg">#F5F5F5</color>
     <color name="line_bg">#CFCFCF</color>
+    <color name="readed_color">#F0F3F6</color>
+    <color name="btn_color">#FF8800</color>
 </resources>

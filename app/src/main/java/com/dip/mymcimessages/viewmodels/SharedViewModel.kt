@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor() : ViewModel() {
     val messageCount = MutableLiveData<Int>()
 
-    fun sendMessage(count: Int) {
+    fun updateCount(count: Int) {
         messageCount.postValue(count)
     }
 }

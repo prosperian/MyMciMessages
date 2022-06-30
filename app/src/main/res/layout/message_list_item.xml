@@ -1,160 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_12sdp"
-    android:layout_marginTop="@dimen/_12sdp"
-    android:layout_marginEnd="@dimen/_12sdp"
-    android:layout_marginBottom="@dimen/_4sdp"
-    app:cardCornerRadius="@dimen/_10sdp">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/cb_item_check"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/_12sdp"
-        android:paddingTop="@dimen/_8sdp"
-        android:paddingEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_8sdp">
+        android:padding="@dimen/_4sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/card_view"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_message_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/date_tmp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_share"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cb_item_check"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_bookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:padding="@dimen/_4sdp"
-            android:src="@drawable/ic_bookmark"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:padding="@dimen/_4sdp"
-            android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_bookmark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toEndOf="@+id/iv_bookmark"
-            app:layout_constraintTop_toTopOf="@+id/iv_bookmark" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_message_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:text="@string/title"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_16ssp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_bookmark" />
-
-
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/motion_layout"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            app:layoutDescription="@xml/message_list_item_scene"
-            app:layout_constraintBottom_toTopOf="@+id/line"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_message_title"
-            app:layout_constraintVertical_bias="0">
+            android:background="?android:selectableItemBackground"
+            android:clickable="true"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_8sdp">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_message_image"
-                android:layout_width="@dimen/_40sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_4sdp"
-                android:background="@drawable/ic_image_placeholder"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_message_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date_tmp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_share"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_message_description"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearance="@style/ShapeAppearanceOverlay.RoundCorner" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_bookmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="@dimen/_4sdp"
+                android:src="@drawable/ic_bookmark"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:padding="@dimen/_4sdp"
+                android:src="@drawable/ic_share"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_bookmark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/iv_bookmark"
+                app:layout_constraintTop_toTopOf="@+id/iv_bookmark" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_message_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/title"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_bookmark" />
+
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motion_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layoutDescription="@xml/message_list_item_scene"
+                app:layout_constraintBottom_toTopOf="@+id/line"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_message_title"
+                app:layout_constraintVertical_bias="0">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_message_image"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:background="@drawable/ic_image_placeholder"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_message_description"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearance="@style/ShapeAppearanceOverlay.RoundCorner" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_message_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:padding="@dimen/_4sdp"
+                    android:text="@string/lorem_ipsum"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_message_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:background="@drawable/line_bg"
+                app:layout_constraintBottom_toTopOf="@+id/tv_message_credit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motion_layout"
+                app:layout_constraintVertical_bias="0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_message_credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:text="@string/credit_tmp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line"
+                app:layout_constraintVertical_bias="0" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_expand_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_down"
+                app:layout_constraintBottom_toBottomOf="@id/tv_message_credit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_message_credit" />
 
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_message_description"
-                android:layout_width="0dp"
+                android:id="@+id/tv_message_credit_date"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:padding="@dimen/_4sdp"
-                android:text="@string/lorem_ipsum"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_message_image"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.motion.widget.MotionLayout>
+                android:layout_marginStart="@dimen/_8sdp"
+                android:text="@string/date_tmp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_message_credit"
+                app:layout_constraintStart_toEndOf="@+id/iv_expand_btn"
+                app:layout_constraintTop_toTopOf="@+id/tv_message_credit"
+                app:layout_constraintVertical_bias="0" />
 
-        <View
-            android:id="@+id/line"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_2sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:background="@drawable/line_bg"
-            app:layout_constraintBottom_toTopOf="@+id/tv_message_credit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/motion_layout"
-            app:layout_constraintVertical_bias="0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_message_credit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
-            android:text="@string/credit_tmp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line"
-            app:layout_constraintVertical_bias="0" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_expand_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?android:selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_arrow_down"
-            app:layout_constraintBottom_toBottomOf="@id/tv_message_credit"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_message_credit" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_message_credit_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:text="@string/date_tmp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_message_credit"
-            app:layout_constraintStart_toEndOf="@+id/iv_expand_btn"
-            app:layout_constraintTop_toTopOf="@+id/tv_message_credit"
-            app:layout_constraintVertical_bias="0" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
