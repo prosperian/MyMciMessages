@@ -9,5 +9,18 @@
         android:id="@+id/onlineMessagesFragment"
         android:name="com.dip.mymcimessages.fragments.OnlineMessagesFragment"
         android:label="fragment_online_messages"
-        tools:layout="@layout/fragment_online_messages" />
+        tools:layout="@layout/fragment_online_messages" >
+        <action
+            android:id="@+id/action_onlineMessagesFragment_to_bookmarkMessagesFragment"
+            app:destination="@id/bookmarkMessagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookmarkMessagesFragment"
+        android:name="com.dip.mymcimessages.fragments.BookmarkMessagesFragment"
+        android:label="fragment_bookmark_messages"
+        tools:layout="@layout/fragment_bookmark_messages" >
+        <action
+            android:id="@+id/action_bookmarkMessagesFragment_to_onlineMessagesFragment"
+            app:destination="@id/onlineMessagesFragment" />
+    </fragment>
 </navigation>

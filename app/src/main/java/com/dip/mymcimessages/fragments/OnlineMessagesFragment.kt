@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.dip.mymcimessages.R
+import com.dip.mymcimessages.adapters.MessageListAdapter
 import com.dip.mymcimessages.api.Resource
 import com.dip.mymcimessages.databinding.FragmentOnlineMessagesBinding
 import com.dip.mymcimessages.viewmodels.MessagesViewModel
+import com.dip.mymcimessages.viewmodels.SharedViewModel
 
 class OnlineMessagesFragment : Fragment() {
 
@@ -31,20 +33,30 @@ class OnlineMessagesFragment : Fragment() {
         binding = FragmentOnlineMessagesBinding.bind(view)
 
         viewModel = ViewModelProvider(requireActivity()).get(MessagesViewModel::class.java)
+        val sharedViewMode = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        viewModel.messageList.observe(viewLifecycleOwner) {
+        viewModel.messageList.observe(requireActivity()) {
             when (it) {
-
                 is Resource.Success -> {
                     Log.d(TAG, "size: " + it.data?.messages?.size.toString())
+                    val messages = it.data?.messages
+                    if (messages.isNullOrEmpty()) {
+                        binding.root.hideList()
+                    } else {
+                        val adapter = MessageListAdapter(messages)
+                        binding.root.showList(adapter)
+                        sharedViewMode.sendMessage(messages.size)
+                    }
                 }
 
                 is Resource.Loading -> {
                     Log.d(TAG, "loading")
+                    binding.root.hideList()
                 }
 
                 is Resource.Error -> {
                     Log.d(TAG, "error: " + it.message)
+                    binding.root.hideList()
                 }
 
                 else -> {
@@ -53,8 +65,8 @@ class OnlineMessagesFragment : Fragment() {
             }
 
         }
-
-        viewModel.getMessages()
+        if (!viewModel.messageList.hasActiveObservers())
+            viewModel.getMessages()
 
     }
 

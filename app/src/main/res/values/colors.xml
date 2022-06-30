@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="app_bar_color">#CFF5FF</color>
     <color name="unselected_color">#80000000</color>
+    <color name="fragment_bg">#F5F5F5</color>
+    <color name="line_bg">#CFCFCF</color>
 </resources>

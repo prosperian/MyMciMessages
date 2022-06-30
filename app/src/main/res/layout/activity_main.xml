@@ -37,6 +37,24 @@
             app:layout_constraintWidth_percent="0.5" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_message_count"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="0dp"
+            android:background="@drawable/counter_bg"
+            android:gravity="center"
+            android:text="@string/zero"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_public_messages"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@+id/tv_public_messages"
+            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintStart_toStartOf="@+id/tv_public_messages"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_bookmark_messages"
             android:layout_width="0dp"
             android:layout_height="0dp"

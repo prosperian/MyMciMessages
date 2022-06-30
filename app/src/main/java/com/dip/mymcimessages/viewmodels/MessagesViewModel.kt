@@ -1,5 +1,6 @@
 package com.dip.mymcimessages.viewmodels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dip.mymcimessages.api.ApiResponse
@@ -17,8 +18,8 @@ import javax.inject.Inject
 class MessagesViewModel @Inject constructor(private val networkRepository: NetworkRepository) :
     ViewModel() {
 
-    private val _messageList: SingleLiveEvent<Resource<ApiResponse<MutableList<Message>>>> =
-        SingleLiveEvent()
+    private val _messageList: MutableLiveData<Resource<ApiResponse<MutableList<Message>>>> =
+        MutableLiveData()
     val messageList get() = _messageList
 
     fun getMessages() = viewModelScope.launch {

@@ -5,4 +5,10 @@
     <string name="messages_title">پیام های من</string>
     <string name="general">عمومی</string>
     <string name="bookmarked">ذخیره شده</string>
+    <string name="empty_list">هیچ پیامی جهت نمایش موجود نیست</string>
+    <string name="date_tmp">1400/10/15 - 10:50</string>
+    <string name="title">عنوان پیام</string>
+    <string name="lorem_ipsum">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم ...</string>
+    <string name="credit_tmp">اعتبار پیام</string>
+    <string name="zero">0</string>
 </resources>
