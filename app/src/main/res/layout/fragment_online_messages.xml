@@ -7,7 +7,6 @@
     android:background="@color/fragment_bg"
     tools:context=".fragments.OnlineMessagesFragment">
 
-
     <LinearLayout
         android:id="@+id/animation_view"
         android:layout_width="match_parent"
@@ -43,6 +42,4 @@
             android:text="@string/cancel"
             android:textColor="@color/white" />
     </LinearLayout>
-
-
 </com.dip.mymcimessages.ui.CustomListView>

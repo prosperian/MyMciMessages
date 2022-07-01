@@ -1,6 +1,8 @@
 package com.dip.mymcimessages.ui
 
-interface IListListener {
-    fun showListDeleteDialog()
+import com.dip.mymcimessages.models.Message
+
+
+interface IListListener : IListener {
     fun listChanged(size: Int)
 }

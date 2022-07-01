@@ -69,7 +69,7 @@ class AnimationHandler {
         constraintSet.applyTo(root)
     }
 
-    fun hideDeleteDialog(root: ConstraintLayout, animationView: View){
+    fun hideDeleteDialog(root: ConstraintLayout, animationView: View) {
         val constraintSet = ConstraintSet()
         constraintSet.clone(root)
         constraintSet.clear(animationView.id, ConstraintSet.BOTTOM)

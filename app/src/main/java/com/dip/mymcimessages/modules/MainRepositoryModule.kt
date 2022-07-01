@@ -1,6 +1,8 @@
 package com.dip.mymcimessages.modules
 
 import com.dip.mymcimessages.api.ApiService
+import com.dip.mymcimessages.db.MessageDao
+import com.dip.mymcimessages.repositories.DatabaseRepository
 import com.dip.mymcimessages.repositories.NetworkRepository
 import dagger.Module
 import dagger.Provides
@@ -16,6 +18,12 @@ class MainRepositoryModule {
     @Singleton
     fun provideNetworkRepository(apiService: ApiService): NetworkRepository {
         return NetworkRepository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatabaseRepository(messageDao: MessageDao): DatabaseRepository {
+        return DatabaseRepository(messageDao)
     }
 
 }

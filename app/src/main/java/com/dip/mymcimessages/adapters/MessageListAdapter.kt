@@ -11,10 +11,11 @@ import com.dip.mymcimessages.R
 import com.dip.mymcimessages.databinding.MessageListItemBinding
 import com.dip.mymcimessages.models.Message
 import com.dip.mymcimessages.ui.IListListener
+import com.dip.mymcimessages.ui.IListener
 
 class MessageListAdapter(
     private val mList: MutableList<Message>,
-    private val iListListener: IListListener
+    private val iListener: IListener
 ) :
     RecyclerView.Adapter<MessageListAdapter.MyViewHolder>() {
 
@@ -45,6 +46,11 @@ class MessageListAdapter(
                 binding.cardView.setCardBackgroundColor(context.resources.getColor(R.color.readed_color))
             }
 
+            if (item.bookmarked) {
+                binding.ivBookmark.setImageResource(R.drawable.ic_bookmark_on)
+            } else {
+                binding.ivBookmark.setImageResource(R.drawable.ic_bookmark)
+            }
             if (!selectionMode) {
                 binding.cbItemCheck.visibility = View.GONE
                 if (expanded) {
@@ -81,10 +87,17 @@ class MessageListAdapter(
                 selectionMode = true
                 binding.cbItemCheck.isChecked = true
                 notifyItemRangeChanged(0, mList.size)
-                iListListener.showListDeleteDialog()
+                iListener.showListDeleteDialog()
                 true
             }
-
+            binding.ivBookmark.setOnClickListener {
+                item.bookmarked = !item.bookmarked
+                iListener.updateMessage(item)
+                notifyItemChanged(position)
+            }
+            binding.ivShare.setOnClickListener {
+                iListener.shareMessage(item)
+            }
         }
     }
 
@@ -100,11 +113,13 @@ class MessageListAdapter(
     fun deleteItems() {
         selectionMode = false
         deleteList.forEach {
+            iListener.removeMessage(mList[it])
             mList.removeAt(it)
             notifyItemRemoved(it)
         }
         notifyItemRangeChanged(0, mList.size)
-        iListListener.listChanged(mList.size)
+        if (iListener is IListListener)
+            iListener.listChanged(mList.size)
     }
 
     class MyViewHolder(val binding: MessageListItemBinding) :
