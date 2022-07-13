@@ -2,6 +2,7 @@ package com.dip.mymcimessages.adapters
 
 import android.content.Context
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,7 @@ class MessageListAdapter(
 
     private lateinit var context: Context
     private var selectionMode: Boolean = false
-    private val deleteList: MutableList<Int> = mutableListOf()
+    private val deleteList: MutableList<Message> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         context = parent.context
@@ -77,9 +78,9 @@ class MessageListAdapter(
 
             binding.cbItemCheck.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
-                    deleteList.add(position)
+                    deleteList.add(item)
                 } else {
-                    deleteList.remove(position)
+                    deleteList.remove(item)
                 }
             }
 
@@ -93,7 +94,12 @@ class MessageListAdapter(
             binding.ivBookmark.setOnClickListener {
                 item.bookmarked = !item.bookmarked
                 iListener.updateMessage(item)
-                notifyItemChanged(position)
+                if (item.bookmarked) {
+                    notifyItemChanged(position)
+                } else {
+                    mList.remove(item)
+                    notifyItemRemoved(position)
+                }
             }
             binding.ivShare.setOnClickListener {
                 iListener.shareMessage(item)
@@ -112,12 +118,15 @@ class MessageListAdapter(
 
     fun deleteItems() {
         selectionMode = false
+        Log.d("mlist size: ", mList.size.toString())
+        Log.d("delete list size: ", deleteList.size.toString())
         deleteList.forEach {
-            iListener.removeMessage(mList[it])
-            mList.removeAt(it)
-            notifyItemRemoved(it)
+            iListener.removeMessage(it)
         }
-        notifyItemRangeChanged(0, mList.size)
+        deleteList.forEach {
+            mList.remove(it)
+        }
+        notifyDataSetChanged()
         if (iListener is IListListener)
             iListener.listChanged(mList.size)
     }
